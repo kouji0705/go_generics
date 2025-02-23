@@ -1,6 +1,9 @@
 package items
 
-import "fmt"
+import (
+	"errors"
+	"fmt"
+)
 
 type SingleItem struct {
 	Value      string
@@ -29,4 +32,25 @@ func (s *SingleItem) SetValue(value string) error {
 
 func (s *SingleItem) GetValue() string {
 	return s.Value
+}
+
+// RequiredCheck は必須チェックを実施します
+func (s *SingleItem) RequiredCheck() error {
+	if s.Value == "" {
+		return errors.New("value is required")
+	}
+	return nil
+}
+
+// Save は全てのバリデーションを実施します
+func (s *SingleItem) Save() error {
+	if err := s.FormatCheck(); err != nil {
+		return err
+	}
+	return s.RequiredCheck()
+}
+
+// SaveDraft はフォーマットチェックのみを実施します
+func (s *SingleItem) SaveDraft() error {
+	return s.FormatCheck()
 }

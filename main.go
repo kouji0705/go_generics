@@ -37,4 +37,24 @@ func main() {
 	for i, value := range itemResults.GetValues() {
 		fmt.Printf("Item[%d]: %s\n", i, value)
 	}
+
+	// SaveDraftのテスト
+	fmt.Println("\n--- Testing SaveDraft ---")
+	for i, item := range itemResults {
+		if err := item.SaveDraft(); err != nil {
+			fmt.Printf("Item[%d] SaveDraft Error: %v\n", i, err)
+		} else {
+			fmt.Printf("Item[%d] SaveDraft OK\n", i)
+		}
+	}
+
+	// Saveのテスト
+	fmt.Println("\n--- Testing Save ---")
+	for i, item := range itemResults {
+		if err := item.Save(); err != nil {
+			fmt.Printf("Item[%d] Save Error: %v\n", i, err)
+		} else {
+			fmt.Printf("Item[%d] Save OK\n", i)
+		}
+	}
 }

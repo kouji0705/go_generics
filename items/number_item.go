@@ -33,3 +33,24 @@ func (n *NumberItem) SetValue(value string) error {
 func (n *NumberItem) GetValue() string {
 	return fmt.Sprintf("%f", n.Value)
 }
+
+// RequiredCheck は必須チェックを実施します
+func (n *NumberItem) RequiredCheck() error {
+	if n.Value == 0 {
+		return errors.New("value is required")
+	}
+	return nil
+}
+
+// Save は全てのバリデーションを実施します
+func (n *NumberItem) Save() error {
+	if err := n.FormatCheck(); err != nil {
+		return err
+	}
+	return n.RequiredCheck()
+}
+
+// SaveDraft はフォーマットチェックのみを実施します
+func (n *NumberItem) SaveDraft() error {
+	return n.FormatCheck()
+}
