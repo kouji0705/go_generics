@@ -6,7 +6,6 @@ import (
 
 // ItemResult インターフェース
 type ItemResult interface {
-	FormatCheck() error
 	Save() error
 	SaveDraft() error
 	SetValue(value string) error

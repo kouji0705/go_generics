@@ -14,9 +14,18 @@ func NewNumberItem() *NumberItem {
 	return &NumberItem{}
 }
 
-func (n *NumberItem) FormatCheck() error {
+// formatCheck は数値のフォーマットチェックを実施します
+func (n *NumberItem) formatCheck() error {
 	if n.Value < 0 {
 		return errors.New("value must be a non-negative number")
+	}
+	return nil
+}
+
+// requiredCheck は必須チェックを実施します
+func (n *NumberItem) requiredCheck() error {
+	if n.Value == 0 {
+		return errors.New("value is required")
 	}
 	return nil
 }
@@ -27,30 +36,22 @@ func (n *NumberItem) SetValue(value string) error {
 		return errors.New("invalid number format")
 	}
 	n.Value = num
-	return n.FormatCheck()
+	return n.formatCheck()
 }
 
 func (n *NumberItem) GetValue() string {
 	return fmt.Sprintf("%f", n.Value)
 }
 
-// RequiredCheck は必須チェックを実施します
-func (n *NumberItem) RequiredCheck() error {
-	if n.Value == 0 {
-		return errors.New("value is required")
-	}
-	return nil
-}
-
 // Save は全てのバリデーションを実施します
 func (n *NumberItem) Save() error {
-	if err := n.FormatCheck(); err != nil {
+	if err := n.formatCheck(); err != nil {
 		return err
 	}
-	return n.RequiredCheck()
+	return n.requiredCheck()
 }
 
 // SaveDraft はフォーマットチェックのみを実施します
 func (n *NumberItem) SaveDraft() error {
-	return n.FormatCheck()
+	return n.formatCheck()
 }

@@ -16,7 +16,8 @@ func NewSingleItem(candidates []string) *SingleItem {
 	}
 }
 
-func (s *SingleItem) FormatCheck() error {
+// formatCheck は選択肢のフォーマットチェックを実施します
+func (s *SingleItem) formatCheck() error {
 	for _, candidate := range s.Candidates {
 		if s.Value == candidate {
 			return nil
@@ -25,32 +26,32 @@ func (s *SingleItem) FormatCheck() error {
 	return fmt.Errorf("value must be one of %v", s.Candidates)
 }
 
-func (s *SingleItem) SetValue(value string) error {
-	s.Value = value
-	return s.FormatCheck()
-}
-
-func (s *SingleItem) GetValue() string {
-	return s.Value
-}
-
-// RequiredCheck は必須チェックを実施します
-func (s *SingleItem) RequiredCheck() error {
+// requiredCheck は必須チェックを実施します
+func (s *SingleItem) requiredCheck() error {
 	if s.Value == "" {
 		return errors.New("value is required")
 	}
 	return nil
 }
 
+func (s *SingleItem) SetValue(value string) error {
+	s.Value = value
+	return s.formatCheck()
+}
+
+func (s *SingleItem) GetValue() string {
+	return s.Value
+}
+
 // Save は全てのバリデーションを実施します
 func (s *SingleItem) Save() error {
-	if err := s.FormatCheck(); err != nil {
+	if err := s.formatCheck(); err != nil {
 		return err
 	}
-	return s.RequiredCheck()
+	return s.requiredCheck()
 }
 
 // SaveDraft はフォーマットチェックのみを実施します
 func (s *SingleItem) SaveDraft() error {
-	return s.FormatCheck()
+	return s.formatCheck()
 }

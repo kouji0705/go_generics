@@ -13,36 +13,37 @@ func NewStringItem() *StringItem {
 	return &StringItem{}
 }
 
-func (s *StringItem) FormatCheck() error {
+// formatCheck は文字列のフォーマットチェックを実施します
+func (s *StringItem) formatCheck() error {
 	return nil // 特に制約なし
 }
 
-func (s *StringItem) SetValue(value string) error {
-	s.Value = value
-	return s.FormatCheck()
-}
-
-func (s *StringItem) GetValue() string {
-	return s.Value
-}
-
-// RequiredCheck は必須チェックを実施します
-func (s *StringItem) RequiredCheck() error {
+// requiredCheck は必須チェックを実施します
+func (s *StringItem) requiredCheck() error {
 	if s.Value == "" {
 		return errors.New("value is required")
 	}
 	return nil
 }
 
+func (s *StringItem) SetValue(value string) error {
+	s.Value = value
+	return s.formatCheck()
+}
+
+func (s *StringItem) GetValue() string {
+	return s.Value
+}
+
 // Save は全てのバリデーションを実施します
 func (s *StringItem) Save() error {
-	if err := s.FormatCheck(); err != nil {
+	if err := s.formatCheck(); err != nil {
 		return err
 	}
-	return s.RequiredCheck()
+	return s.requiredCheck()
 }
 
 // SaveDraft はフォーマットチェックのみを実施します
 func (s *StringItem) SaveDraft() error {
-	return s.FormatCheck()
+	return s.formatCheck()
 }
