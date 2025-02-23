@@ -26,17 +26,13 @@ func (s *StringItem) requiredCheck() error {
 	return nil
 }
 
-func (s *StringItem) SetValue(value string) error {
-	s.Value = value
-	return s.formatCheck()
-}
-
 func (s *StringItem) GetValue() string {
 	return s.Value
 }
 
 // Save は全てのバリデーションを実施します
-func (s *StringItem) Save() error {
+func (s *StringItem) Save(value string) error {
+	s.Value = value
 	if err := s.formatCheck(); err != nil {
 		return err
 	}
@@ -44,6 +40,7 @@ func (s *StringItem) Save() error {
 }
 
 // SaveDraft はフォーマットチェックのみを実施します
-func (s *StringItem) SaveDraft() error {
+func (s *StringItem) SaveDraft(value string) error {
+	s.Value = value
 	return s.formatCheck()
 }

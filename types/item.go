@@ -6,9 +6,8 @@ import (
 
 // ItemResult インターフェース
 type ItemResult interface {
-	Save() error
-	SaveDraft() error
-	SetValue(value string) error
+	Save(value string) error
+	SaveDraft(value string) error
 	GetValue() string
 }
 
@@ -20,11 +19,22 @@ func (items *ItemResults) Add(item ItemResult) {
 	*items = append(*items, item)
 }
 
-// SetValueAll は全てのアイテムに対して値を設定します
-func (items ItemResults) SetValueAll(value string) []error {
+// SaveAll は全てのアイテムに対して値を保存します
+func (items ItemResults) SaveAll(value string) []error {
 	var errors []error
 	for i, item := range items {
-		if err := item.SetValue(value); err != nil {
+		if err := item.Save(value); err != nil {
+			errors = append(errors, fmt.Errorf("item[%d]: %w", i, err))
+		}
+	}
+	return errors
+}
+
+// SaveDraftAll は全てのアイテムに対してドラフトとして保存します
+func (items ItemResults) SaveDraftAll(value string) []error {
+	var errors []error
+	for i, item := range items {
+		if err := item.SaveDraft(value); err != nil {
 			errors = append(errors, fmt.Errorf("item[%d]: %w", i, err))
 		}
 	}

@@ -44,7 +44,12 @@ func (n *NumberItem) GetValue() string {
 }
 
 // Save は全てのバリデーションを実施します
-func (n *NumberItem) Save() error {
+func (n *NumberItem) Save(value string) error {
+	num, err := strconv.ParseFloat(value, 64)
+	if err != nil {
+		return errors.New("invalid number format")
+	}
+	n.Value = num
 	if err := n.formatCheck(); err != nil {
 		return err
 	}
@@ -52,6 +57,11 @@ func (n *NumberItem) Save() error {
 }
 
 // SaveDraft はフォーマットチェックのみを実施します
-func (n *NumberItem) SaveDraft() error {
+func (n *NumberItem) SaveDraft(value string) error {
+	num, err := strconv.ParseFloat(value, 64)
+	if err != nil {
+		return errors.New("invalid number format")
+	}
+	n.Value = num
 	return n.formatCheck()
 }
