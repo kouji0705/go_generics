@@ -7,38 +7,34 @@ import (
 )
 
 func main() {
-	// StringItemの例
-	stringContainer := types.Container[types.ItemResult]{
-		Item: items.NewStringItem(),
-	}
-	if err := stringContainer.SetValue("Hello"); err != nil {
-		fmt.Println("StringItem Error:", err)
-	} else {
-		fmt.Println("StringItem Value:", stringContainer.GetValue())
+	// ItemResultsの作成
+	var itemResults types.ItemResults
+
+	// 各種アイテムの追加
+	itemResults.Add(items.NewStringItem())
+	itemResults.Add(items.NewNumberItem())
+	itemResults.Add(items.NewSingleItem([]string{"Apple", "Banana", "Cherry"}))
+
+	// 全アイテムに対して値を設定
+	fmt.Println("--- Setting 'Hello' to all items ---")
+	if errs := itemResults.SetValueAll("Hello"); len(errs) > 0 {
+		for _, err := range errs {
+			fmt.Println("Error:", err)
+		}
 	}
 
-	// NumberItemの例
-	numberContainer := types.Container[types.ItemResult]{
-		Item: items.NewNumberItem(),
-	}
-	if err := numberContainer.SetValue("123.45"); err != nil {
-		fmt.Println("NumberItem Error:", err)
-	} else {
-		fmt.Println("NumberItem Value:", numberContainer.GetValue())
+	fmt.Println("\n--- Current values ---")
+	for i, value := range itemResults.GetValues() {
+		fmt.Printf("Item[%d]: %s\n", i, value)
 	}
 
-	// SingleItemの例
-	singleContainer := types.Container[types.ItemResult]{
-		Item: items.NewSingleItem([]string{"Apple", "Banana", "Cherry"}),
-	}
-	if err := singleContainer.SetValue("Banana"); err != nil {
-		fmt.Println("SingleItem Error:", err)
-	} else {
-		fmt.Println("SingleItem Value:", singleContainer.GetValue())
-	}
+	fmt.Println("\n--- Setting valid values ---")
+	itemResults[0].SetValue("Hello")  // StringItem
+	itemResults[1].SetValue("123.45") // NumberItem
+	itemResults[2].SetValue("Apple")  // SingleItem
 
-	// バリデーション失敗例
-	if err := singleContainer.SetValue("Orange"); err != nil {
-		fmt.Println("Invalid SingleItem:", err)
+	fmt.Println("\n--- Final values ---")
+	for i, value := range itemResults.GetValues() {
+		fmt.Printf("Item[%d]: %s\n", i, value)
 	}
 }
