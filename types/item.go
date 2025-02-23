@@ -11,23 +11,6 @@ type ItemResult interface {
 	GetValue() string
 }
 
-// Container ジェネリック構造体
-type Container[T ItemResult] struct {
-	Item T
-}
-
-func (c *Container[T]) SetValue(value string) error {
-	return c.Item.SetValue(value)
-}
-
-func (c *Container[T]) GetValue() string {
-	return c.Item.GetValue()
-}
-
-func (c *Container[T]) FormatCheck() error {
-	return c.Item.FormatCheck()
-}
-
 // ItemResults は複数のItemResultを管理するためのスライス型
 type ItemResults []ItemResult
 
