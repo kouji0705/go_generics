@@ -12,10 +12,10 @@ type SingleForm struct {
 func NewSingleForm(id string, validation []string, candidates []string) *SingleForm {
 	return &SingleForm{
 		BaseForm: BaseForm{
-			ID:         id,
-			Type:       "single",
-			Validation: validation,
-			Candidates: candidates,
+			ID:   id,
+			Type: "single",
+			// Validation: validation,
+			// Candidates: candidates,
 		},
 	}
 }

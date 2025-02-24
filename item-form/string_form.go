@@ -7,9 +7,9 @@ type StringForm struct {
 func NewStringForm(id string, validation []string) *StringForm {
 	return &StringForm{
 		BaseForm: BaseForm{
-			ID:         id,
-			Type:       "string",
-			Validation: validation,
+			ID:   id,
+			Type: "string",
+			// Validation: validation,
 		},
 	}
 }

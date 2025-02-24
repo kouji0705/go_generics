@@ -16,25 +16,25 @@ type BaseForm struct {
 	Type       string   // フォームの種類（string, number, single など）
 	Value      string   // フォームの値
 	Validation []string // バリデーションルール
-	Candidates []string // 選択肢（該当する場合のみ使用）
+	// Candidates []string // 選択肢（該当する場合のみ使用）
 }
 
-func (f *BaseForm) GetID() string {
-	return f.ID
-}
+// func (f *BaseForm) GetID() string {
+// 	return f.ID
+// }
 
-func (f *BaseForm) GetType() string {
-	return f.Type
-}
+// func (f *BaseForm) GetType() string {
+// 	return f.Type
+// }
 
-func (f *BaseForm) GetValidation() []string {
-	return f.Validation
-}
+// func (f *BaseForm) GetValidation() []string {
+// 	return f.Validation
+// }
 
-func (f *BaseForm) GetCandidates() []string {
-	return f.Candidates
-}
+// func (f *BaseForm) GetCandidates() []string {
+// 	return f.Candidates
+// }
 
-func (f *BaseForm) GetValue() string {
-	return f.Value
-}
+// func (f *BaseForm) GetValue() string {
+// 	return f.Value
+// }
