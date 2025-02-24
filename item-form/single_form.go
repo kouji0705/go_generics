@@ -27,3 +27,17 @@ func (f *SingleForm) Validate(value string) error {
 	}
 	return fmt.Errorf("value must be one of %v", f.candidates)
 }
+
+func (f *SingleForm) SetValue(value string) *SingleForm {
+	f.value = value
+	return f
+}
+
+func (f *SingleForm) SetValidation(validation []string) *SingleForm {
+	f.validation = validation
+	return f
+}
+
+func (f *SingleForm) Candidates() []string {
+	return f.candidates
+}

@@ -24,3 +24,13 @@ func (f *NumberForm) Validate(value string) error {
 	f.value = value
 	return nil
 }
+
+func (f *NumberForm) SetValue(value string) *NumberForm {
+	f.value = value
+	return f
+}
+
+func (f *NumberForm) SetValidation(validation []string) *NumberForm {
+	f.validation = validation
+	return f
+}

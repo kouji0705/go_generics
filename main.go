@@ -1,78 +1,56 @@
 package main
 
-// import (
-// 	"fmt"
-// 	form "go_generics/item-form"
-// 	"go_generics/items"
-// )
+import (
+	"fmt"
+	form "go_generics/item-form"
+)
 
-// func main() {
-// 	// フォームの作成
-// 	forms := []form.Form{
-// 		form.NewStringForm("string1", nil),
-// 		form.NewNumberForm("number1", nil),
-// 		form.NewSingleForm("single1", nil, []string{"Apple", "Banana", "Cherry"}),
-// 	}
+func main() {
+	// フォームの作成
+	forms := []form.ItemForm{
+		// 文字列フォーム
+		form.NewStringForm("username").
+			SetValidation([]string{"required", "max:50"}).
+			SetValue("John Doe"),
 
-// 	// バリデーションのテスト
-// 	fmt.Println("--- Validating forms ---")
-// 	testValues := []string{"Hello", "123.45", "Apple"}
-// 	for i, form := range forms {
-// 		if err := form.Validate(testValues[i]); err != nil {
-// 			fmt.Printf("Form[%d] Validation Error: %v\n", i, err)
-// 		} else {
-// 			fmt.Printf("Form[%d] Validation OK\n", i)
-// 		}
-// 	}
+		// 数値フォーム
+		form.NewNumberForm("age").
+			SetValidation([]string{"required", "min:0", "max:150"}).
+			SetValue("25"),
 
-// 	// ItemResultsの作成
-// 	var itemResults items.ItemResults
+		// 選択フォーム
+		form.NewSingleForm("role", []string{"admin", "user", "guest"}).
+			SetValidation([]string{"required"}).
+			SetValue("user"),
+	}
 
-// 	// 各種アイテムの追加
-// 	itemResults.Add(items.NewStringItem())
-// 	itemResults.Add(items.NewNumberItem())
-// 	itemResults.Add(items.NewSingleItem([]string{"Apple", "Banana", "Cherry"}))
+	// フォームの型と値を表示
+	fmt.Println("=== Form Values ===")
+	for _, f := range forms {
+		switch v := f.(type) {
+		case *form.StringForm:
+			fmt.Printf("String[%s]: %s\n", v.ID(), v.Value())
+		case *form.NumberForm:
+			fmt.Printf("Number[%s]: %s\n", v.ID(), v.Value())
+		case *form.SingleForm:
+			fmt.Printf("Single[%s]: %s (choices: %v)\n", v.ID(), v.Value(), v.Candidates())
+		}
+	}
 
-// 	// 全アイテムに対して値を設定
-// 	fmt.Println("--- Setting 'Hello' to all items ---")
-// 	if errs := itemResults.SaveDraftAll("Hello"); len(errs) > 0 {
-// 		for _, err := range errs {
-// 			fmt.Println("Error:", err)
-// 		}
-// 	}
+	// バリデーションのテスト
+	fmt.Println("\n=== Validation Test ===")
+	testValues := map[string]string{
+		"username": "Jane Smith",
+		"age":      "invalid",
+		"role":     "superuser",
+	}
 
-// 	fmt.Println("\n--- Current values ---")
-// 	for i, value := range itemResults.GetValues() {
-// 		fmt.Printf("Item[%d]: %s\n", i, value)
-// 	}
-
-// 	fmt.Println("\n--- Setting valid values ---")
-// 	itemResults[0].SaveDraft("Hello")  // StringItem
-// 	itemResults[1].SaveDraft("123.45") // NumberItem
-// 	itemResults[2].SaveDraft("Apple")  // SingleItem
-
-// 	fmt.Println("\n--- Final values ---")
-// 	for i, value := range itemResults.GetValues() {
-// 		fmt.Printf("Item[%d]: %s\n", i, value)
-// 	}
-
-// 	// SaveDraftのテスト
-// 	fmt.Println("\n--- Testing SaveDraft ---")
-// 	for i, item := range itemResults {
-// 		if err := item.SaveDraft("test"); err != nil {
-// 			fmt.Printf("Item[%d] SaveDraft Error: %v\n", i, err)
-// 		} else {
-// 			fmt.Printf("Item[%d] SaveDraft OK\n", i)
-// 		}
-// 	}
-
-// 	// Saveのテスト
-// 	fmt.Println("\n--- Testing Save ---")
-// 	for i, item := range itemResults {
-// 		if err := item.Save("test"); err != nil {
-// 			fmt.Printf("Item[%d] Save Error: %v\n", i, err)
-// 		} else {
-// 			fmt.Printf("Item[%d] Save OK\n", i)
-// 		}
-// 	}
-// }
+	for _, f := range forms {
+		value := testValues[f.ID()]
+		if err := f.Validate(value); err != nil {
+			fmt.Printf("❌ %s: %v\n", f.ID(), err)
+		} else {
+			fmt.Printf("✅ %s: %s\n", f.ID(), f.Value())
+		}
+	}
+}
