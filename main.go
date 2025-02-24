@@ -2,10 +2,36 @@ package main
 
 import (
 	"fmt"
+	itemform "go_generics/item-form"
 	"go_generics/items"
 )
 
 func main() {
+	// フォームの作成
+	forms := []itemform.Form{
+		itemform.NewStringForm(),
+		itemform.NewNumberForm(),
+		itemform.NewSingleForm([]string{"Apple", "Banana", "Cherry"}),
+	}
+
+	// バリデーションのテスト
+	fmt.Println("--- Validating forms ---")
+	testValues := []string{"Hello", "123.45", "Apple"}
+	for i, form := range forms {
+		if err := form.Validate(testValues[i]); err != nil {
+			fmt.Printf("Form[%d] Validation Error: %v\n", i, err)
+		} else {
+			fmt.Printf("Form[%d] Validation OK\n", i)
+		}
+	}
+
+	// // アイテムの生成
+	// var itemResults items.ItemResults
+	// for _, form := range forms {
+	// 	item := form.Build()
+	// 	itemResults.Add(item)
+	// }
+
 	// ItemResultsの作成
 	var itemResults items.ItemResults
 
