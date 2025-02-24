@@ -8,12 +8,11 @@ type NumberForm struct {
 	BaseForm
 }
 
-func NewNumberForm(id string, validation []string) *NumberForm {
+func NewNumberForm(id string) *NumberForm {
 	return &NumberForm{
 		BaseForm: BaseForm{
-			ID:         id,
-			Type:       "number",
-			Validation: validation,
+			ID:   id,
+			Type: "number",
 		},
 	}
 }

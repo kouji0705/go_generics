@@ -9,13 +9,11 @@ type SingleForm struct {
 	Candidates []string
 }
 
-func NewSingleForm(id string, validation []string, candidates []string) *SingleForm {
+func NewSingleForm(id string, candidates []string) *SingleForm {
 	return &SingleForm{
 		BaseForm: BaseForm{
 			ID:   id,
 			Type: "single",
-			// Validation: validation,
-			// Candidates: candidates,
 		},
 	}
 }

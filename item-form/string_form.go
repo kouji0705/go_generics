@@ -4,7 +4,7 @@ type StringForm struct {
 	BaseForm
 }
 
-func NewStringForm(id string, validation []string) *StringForm {
+func NewStringForm(id string) *StringForm {
 	return &StringForm{
 		BaseForm: BaseForm{
 			ID:   id,
