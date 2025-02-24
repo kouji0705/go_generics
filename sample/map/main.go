@@ -2,16 +2,16 @@ package main
 
 import "fmt"
 
-// Keys はマップから全てのキーを取得
-func Keys[K comparable, V any](m map[K]V) []K {
-	keys := make([]K, 0, len(m))
-	for k := range m {
-		keys = append(keys, k)
+// Values はマップから全ての値を取得
+func Values[K comparable, V any](m map[K]V) []V {
+	values := make([]V, 0, len(m))
+	for _, v := range m {
+		values = append(values, v)
 	}
-	return keys
+	return values
 }
 
 func main() {
 	m := map[string]int{"Alice": 30, "Bob": 25, "Charlie": 35}
-	fmt.Println(Keys(m)) // ["Alice", "Bob", "Charlie"]
+	fmt.Println(Values(m)) // [30, 25, 35]
 }
