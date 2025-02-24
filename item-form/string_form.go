@@ -1,4 +1,4 @@
-package itemform
+package form
 
 import "go_generics/items"
 
@@ -6,8 +6,14 @@ type StringForm struct {
 	BaseForm
 }
 
-func NewStringForm() *StringForm {
-	return &StringForm{}
+func NewStringForm(id string, validation []string) *StringForm {
+	return &StringForm{
+		BaseForm: BaseForm{
+			ID:         id,
+			Type:       "string",
+			Validation: validation,
+		},
+	}
 }
 
 func (f *StringForm) Build() items.ItemResult {

@@ -1,4 +1,4 @@
-package itemform
+package form
 
 import (
 	"fmt"
@@ -10,9 +10,14 @@ type SingleForm struct {
 	Candidates []string
 }
 
-func NewSingleForm(candidates []string) *SingleForm {
+func NewSingleForm(id string, validation []string, candidates []string) *SingleForm {
 	return &SingleForm{
-		Candidates: candidates,
+		BaseForm: BaseForm{
+			ID:         id,
+			Type:       "single",
+			Validation: validation,
+			Candidates: candidates,
+		},
 	}
 }
 
@@ -32,4 +37,4 @@ func (f *SingleForm) Validate(value string) error {
 		}
 	}
 	return fmt.Errorf("value must be one of %v", f.Candidates)
-} 
+}

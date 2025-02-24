@@ -2,16 +2,16 @@ package main
 
 import (
 	"fmt"
-	itemform "go_generics/item-form"
+	form "go_generics/item-form"
 	"go_generics/items"
 )
 
 func main() {
 	// フォームの作成
-	forms := []itemform.Form{
-		itemform.NewStringForm(),
-		itemform.NewNumberForm(),
-		itemform.NewSingleForm([]string{"Apple", "Banana", "Cherry"}),
+	forms := []form.Form{
+		form.NewStringForm("string1", nil),
+		form.NewNumberForm("number1", nil),
+		form.NewSingleForm("single1", nil, []string{"Apple", "Banana", "Cherry"}),
 	}
 
 	// バリデーションのテスト
