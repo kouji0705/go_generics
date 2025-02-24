@@ -12,9 +12,9 @@ func TestStringForm(t *testing.T) {
 		value   string
 		wantErr bool
 	}{
-		{"empty value", "", false},
-		{"normal string", "John Doe", false},
-		{"special chars", "!@#$%", false},
+		{"空文字が許可されること", "", false},
+		{"通常の文字列が許可されること", "John Doe", false},
+		{"特殊文字が許可されること", "!@#$%", false},
 	}
 
 	for _, tt := range tests {
@@ -24,4 +24,4 @@ func TestStringForm(t *testing.T) {
 			}
 		})
 	}
-} 
+}

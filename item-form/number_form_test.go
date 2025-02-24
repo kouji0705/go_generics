@@ -12,10 +12,10 @@ func TestNumberForm(t *testing.T) {
 		value   string
 		wantErr bool
 	}{
-		{"valid integer", "123", false},
-		{"valid decimal", "123.45", false},
-		{"invalid number", "abc", true},
-		{"empty value", "", true},
+		{"整数値が正しく検証できること", "123", false},
+		{"小数値が正しく検証できること", "123.45", false},
+		{"数値以外の文字列はエラーになること", "abc", true},
+		{"空文字はエラーになること", "", true},
 	}
 
 	for _, tt := range tests {

@@ -13,10 +13,10 @@ func TestSingleForm(t *testing.T) {
 		value   string
 		wantErr bool
 	}{
-		{"valid choice", "Apple", false},
-		{"invalid choice", "Orange", true},
-		{"empty value", "", true},
-		{"case sensitive", "apple", true},
+		{"選択肢の中から値を選択できること", "Apple", false},
+		{"選択肢以外の値はエラーになること", "Orange", true},
+		{"空文字はエラーになること", "", true},
+		{"大文字小文字は区別されること", "apple", true},
 	}
 
 	for _, tt := range tests {
@@ -26,4 +26,4 @@ func TestSingleForm(t *testing.T) {
 			}
 		})
 	}
-} 
+}
