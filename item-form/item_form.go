@@ -1,22 +1,34 @@
 package form
 
-// Form はフォームの基底インターフェース
-type Form interface {
-	// Build() items.ItemResult
+type ItemForm interface {
 	Validate(value string) error
-	GetID() string
-	GetType() string
-	GetValidation() []string
-	GetCandidates() []string
+	ID() string
+	Value() string
+	Validation() []string
+	// GetID() string
+	// GetType() string
+	// GetValidation() []string
+	// GetCandidates() []string
 }
 
 // BaseForm は共通のフォーム機能を提供する基底構造体
 type BaseForm struct {
-	ID         string   // フォームの一意識別子
-	Type       string   // フォームの種類（string, number, single など）
-	Value      string   // フォームの値
-	Validation []string // バリデーションルール
+	id         string   // フォームの一意識別子
+	value      string   // フォームの値
+	validation []string // バリデーションルール
 	// Candidates []string // 選択肢（該当する場合のみ使用）
+}
+
+func (f *BaseForm) ID() string {
+	return f.id
+}
+
+func (f *BaseForm) Value() string {
+	return f.value
+}
+
+func (f *BaseForm) Validation() []string {
+	return f.validation
 }
 
 // func (f *BaseForm) GetID() string {

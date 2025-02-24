@@ -11,8 +11,7 @@ type NumberForm struct {
 func NewNumberForm(id string) *NumberForm {
 	return &NumberForm{
 		BaseForm: BaseForm{
-			ID:   id,
-			Type: "number",
+			id: id,
 		},
 	}
 }
@@ -22,6 +21,6 @@ func (f *NumberForm) Validate(value string) error {
 	if err != nil {
 		return err
 	}
-	f.Value = value
+	f.value = value
 	return nil
 }

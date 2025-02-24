@@ -7,14 +7,12 @@ type StringForm struct {
 func NewStringForm(id string) *StringForm {
 	return &StringForm{
 		BaseForm: BaseForm{
-			ID:   id,
-			Type: "string",
-			// Validation: validation,
+			id: id,
 		},
 	}
 }
 
 func (f *StringForm) Validate(value string) error {
-	f.Value = value
+	f.value = value
 	return nil // 文字列は特に制約なし
 }

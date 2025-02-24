@@ -6,24 +6,24 @@ import (
 
 type SingleForm struct {
 	BaseForm
-	Candidates []string
+	candidates []string
 }
 
 func NewSingleForm(id string, candidates []string) *SingleForm {
 	return &SingleForm{
 		BaseForm: BaseForm{
-			ID:   id,
-			Type: "single",
+			id: id,
 		},
+		candidates: candidates,
 	}
 }
 
 func (f *SingleForm) Validate(value string) error {
-	for _, candidate := range f.Candidates {
+	for _, candidate := range f.candidates {
 		if value == candidate {
-			f.Value = value
+			f.value = value
 			return nil
 		}
 	}
-	return fmt.Errorf("value must be one of %v", f.Candidates)
+	return fmt.Errorf("value must be one of %v", f.candidates)
 }
