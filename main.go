@@ -2,8 +2,8 @@ package main
 
 import (
 	"fmt"
-	"your-module-name/items"
-	"your-module-name/types"
+	"go_generics/items"
+	"go_generics/types"
 )
 
 func main() {

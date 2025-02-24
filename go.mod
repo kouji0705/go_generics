@@ -1,3 +1,3 @@
-module your-module-name
+module go_generics
 
 go 1.24
