@@ -3,12 +3,11 @@ package main
 import (
 	"fmt"
 	"go_generics/items"
-	"go_generics/types"
 )
 
 func main() {
 	// ItemResultsの作成
-	var itemResults types.ItemResults
+	var itemResults items.ItemResults
 
 	// 各種アイテムの追加
 	itemResults.Add(items.NewStringItem())
