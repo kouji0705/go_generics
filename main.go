@@ -25,13 +25,6 @@ func main() {
 		}
 	}
 
-	// // アイテムの生成
-	// var itemResults items.ItemResults
-	// for _, form := range forms {
-	// 	item := form.Build()
-	// 	itemResults.Add(item)
-	// }
-
 	// ItemResultsの作成
 	var itemResults items.ItemResults
 

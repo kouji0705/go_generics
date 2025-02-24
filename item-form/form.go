@@ -1,10 +1,8 @@
 package form
 
-import "go_generics/items"
-
 // Form はフォームの基底インターフェース
 type Form interface {
-	Build() items.ItemResult
+	// Build() items.ItemResult
 	Validate(value string) error
 	GetID() string
 	GetType() string

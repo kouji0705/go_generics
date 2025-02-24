@@ -1,7 +1,6 @@
 package form
 
 import (
-	"go_generics/items"
 	"strconv"
 )
 
@@ -17,14 +16,6 @@ func NewNumberForm(id string, validation []string) *NumberForm {
 			Validation: validation,
 		},
 	}
-}
-
-func (f *NumberForm) Build() items.ItemResult {
-	item := items.NewNumberItem()
-	if f.Value != "" {
-		item.SaveDraft(f.Value)
-	}
-	return item
 }
 
 func (f *NumberForm) Validate(value string) error {

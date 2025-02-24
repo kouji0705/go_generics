@@ -2,7 +2,6 @@ package form
 
 import (
 	"fmt"
-	"go_generics/items"
 )
 
 type SingleForm struct {
@@ -19,14 +18,6 @@ func NewSingleForm(id string, validation []string, candidates []string) *SingleF
 			Candidates: candidates,
 		},
 	}
-}
-
-func (f *SingleForm) Build() items.ItemResult {
-	item := items.NewSingleItem(f.Candidates)
-	if f.Value != "" {
-		item.SaveDraft(f.Value)
-	}
-	return item
 }
 
 func (f *SingleForm) Validate(value string) error {
